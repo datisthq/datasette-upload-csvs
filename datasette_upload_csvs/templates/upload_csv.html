@@ -87,6 +87,7 @@ var progress = document.getElementsByTagName("progress")[0];
 var progressLabel = document.getElementById("progress-label");
 var label = dropArea.getElementsByTagName("label")[0];
 var tableName = document.getElementById("id_table_name");
+var tableAppend = document.getElementById("id_table_append");
 var databaseName = document.getElementById("id_database");
 
 // State that holds the most-recent uploaded File, from a FileList
@@ -215,6 +216,7 @@ uploadForm.addEventListener("submit", ev => {
   formData.append("csrftoken", "{{ csrftoken() }}");
   formData.append("csv", currentFile);
   formData.append("table", tableName.value);
+  formData.append("append", tableAppend.value);
   if (databaseName) {
     formData.append("database", databaseName.value);
   }
