@@ -166,6 +166,7 @@ async def test_upload(
                 "csrftoken": csrftoken,
                 "xhr": "1" if use_xhr else "",
                 "database": database,
+                "append": append,
             },
             files=files,
         )

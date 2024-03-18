@@ -120,7 +120,7 @@ async def upload_csvs(scope, receive, datasette, request):
         if table_name.endswith(".csv"):
             table_name = table_name[:-4]
 
-    if not formdata.get('append'):
+    if not formdata.get('append') == 'true':
         # If the table already exists, add a suffix
         suffix = 2
         base_table_name = table_name
