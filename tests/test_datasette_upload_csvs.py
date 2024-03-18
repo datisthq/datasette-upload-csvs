@@ -61,7 +61,7 @@ async def test_menu(tmpdir, auth, has_database):
 
 
 SIMPLE = b"name,age\nCleo,5\nPancakes,4"
-SIMPLE_EXISTED = [{"name": "Alex", "age": 3}]
+SIMPLE_EXISTED = [{"name": "Sam", "age": 6}]
 SIMPLE_EXPECTED = [{"name": "Cleo", "age": 5}, {"name": "Pancakes", "age": 4}]
 NOT_UTF8 = (
     b"IncidentNumber,DateTimeOfCall,CalYear,FinYear,TypeOfIncident,PumpCount,PumpHoursTotal,HourlyNotionalCost(\xa3),IncidentNotionalCost(\xa3)\r\n"
@@ -113,6 +113,13 @@ LATIN1_AFTER_FIRST_2KB = ("just_one_column\n" + "aabbcc\n" * 1048 + "a.b.é").en
         ("latin1-after-x.csv", "LATIN1_AFTER_FIRST_2KB", "latin1-after-x", ANY, False),
         # This table already exists
         ("already_exists.csv", SIMPLE, "already_exists_2", SIMPLE_EXPECTED, False),
+        (
+            "already_exists.csv",
+            SIMPLE,
+            "already_exists",
+            SIMPLE_EXISTED + SIMPLE_EXPECTED,
+            True
+        ),
     ),
 )
 @pytest.mark.parametrize("use_xhr", (True, False))
